@@ -2,6 +2,8 @@
 
 Managing arpwatch.
 
+[![Build Status](https://travis-ci.org/Caseraw/ansible_role_arpwatch.svg?branch=master)](https://travis-ci.org/Caseraw/ansible_role_arpwatch) [<img src="https://img.shields.io/ansible/role/48950">](https://galaxy.ansible.com/caseraw/ansible_role_arpwatch) [<img src="https://img.shields.io/ansible/role/d/48950">](https://galaxy.ansible.com/caseraw/ansible_role_arpwatch) [<img src="https://img.shields.io/ansible/quality/48950">](https://galaxy.ansible.com/caseraw/ansible_role_arpwatch)
+
 - [Ansible role arpwatch](#ansible-role-arpwatch)
   - [License](#license)
   - [Author Information](#author-information)
