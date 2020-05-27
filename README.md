@@ -50,8 +50,11 @@ Compatible with the following list of operating systems:
 
 | Variable name | Description |
 |---------------|-------------|
-| role_arpwatch_required_packages | A package list of required packages. |
-
+| role_arpwatch_required_package_list | A per distro package list. |
+| role_arpwatch_required_packages | Rendered list of distribution package list. |
+| role_arpwatch_service_enabled | Whether to have the service enabled. |
+| role_arpwatch_config_file_path | Absolute path to arpwatch confguration file. |
+| role_arpwatch_config_params | A list of parameters that will be rendered line by line in the configuration file. |
 
 ## Example Playbook
 
@@ -64,7 +67,16 @@ Compatible with the following list of operating systems:
     - import_role:
         name: ansible_role_arpwatch
       vars:
-        role_arpwatch_required_packages: []
+        role_arpwatch_required_package_list:
+          RedHat_7:
+            - arpwatch
+          RedHat_8:
+            - arpwatch
+        role_arpwatch_required_packages: '{{ role_arpwatch_required_package_list[ansible_distribution + "_" + ansible_distribution_major_version] | default(["arpwatch"]) }}'
+        role_arpwatch_service_enabled: True
+        role_arpwatch_config_file_path: /etc/sysconfig/arpwatch
+        role_arpwatch_config_params:
+          - 'OPTIONS="-u arpwatch -e -"'
 
 ...
 ```
