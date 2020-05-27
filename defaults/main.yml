@@ -1,0 +1,19 @@
+---
+### Required packages
+role_arpwatch_required_package_list:
+  RedHat_7:
+    - arpwatch
+  RedHat_8:
+    - arpwatch
+
+role_arpwatch_required_packages: '{{ role_arpwatch_required_package_list[ansible_distribution + "_" + ansible_distribution_major_version] | default(["arpwatch"]) }}'
+
+### Service state
+role_arpwatch_service_enabled: True
+
+### Configuration settings
+role_arpwatch_config_file_path: /etc/sysconfig/arpwatch
+role_arpwatch_config_params:
+  - 'OPTIONS="-u arpwatch -e -"'
+
+...

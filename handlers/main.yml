@@ -1,0 +1,10 @@
+---
+- name: Ensure arpwatch service required state
+  service:
+    name: arpwatch
+    state: '{{ "restarted" if role_arpwatch_service_enabled else "stopped" }}'
+    enabled: '{{ True if role_arpwatch_service_enabled else False }}'
+    daemon_reload: True
+  listen: manage_arpwatch_service
+
+...

@@ -1,0 +1,27 @@
+---
+- name: Ensure required packages are installed
+  package:
+    name: '{{ role_arpwatch_required_packages }}'
+    state: present
+
+- name: Deploy configuration
+  template:
+    src: arpwatch.j2
+    dest: '{{ role_arpwatch_config_file_path }}'
+    owner: root
+    group: root
+    mode: 0644
+  notify: manage_arpwatch_service
+
+- name: Force handlers
+  meta: flush_handlers
+
+- name: Disable and stop arpwatch if required
+  systemd:
+    name: arpwatch
+    state: stopped
+    enabled: False
+  when:
+    - not role_arpwatch_service_enabled
+
+...
