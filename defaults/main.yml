@@ -16,4 +16,8 @@ role_arpwatch_config_file_path: /etc/sysconfig/arpwatch
 role_arpwatch_config_params:
   - 'OPTIONS="-u arpwatch -e -"'
 
+### Systemd overrides
+role_arpwatch_systemd_overrides_dir_path: /etc/systemd/system/arpwatch.service.d
+role_arpwatch_systemd_overrides_file_path: /etc/systemd/system/arpwatch.service.d/overrides.conf
+
 ...

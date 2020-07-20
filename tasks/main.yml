@@ -4,13 +4,31 @@
     name: '{{ role_arpwatch_required_packages }}'
     state: present
 
-- name: Deploy configuration
+- name: Deploy arpwatch configuration
   template:
     src: arpwatch.j2
     dest: '{{ role_arpwatch_config_file_path }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
+  notify: manage_arpwatch_service
+
+- name: Ensure systemd overrides directory is created
+  file:
+    path: '{{ role_arpwatch_systemd_overrides_dir_path }}'
+    state: directory
+    owner: root
+    group: root
+    mode: '0750'
+  notify: manage_arpwatch_service
+
+- name: Deploy systemd overrides file
+  template:
+    src: systemd_arpwatch_override.conf.j2
+    dest: '{{ role_arpwatch_systemd_overrides_file_path }}'
+    owner: root
+    group: root
+    mode: '0644'
   notify: manage_arpwatch_service
 
 - name: Force handlers
